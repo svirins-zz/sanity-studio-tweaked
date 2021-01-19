@@ -1,38 +1,23 @@
-// Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 // First, we must import the schema creator
 import createSchema from 'part:@sanity/base/schema-creator'
 
+// Then import schema types from any plugins that might expose them
+import siteSettings from './siteSettings'
+
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
-  name: 'default',
+  name: 'iam-sanity',
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     /* Your types here! */
+    siteSettings,
     {
-      name: 'author',
+      name: 'page',
       type: 'document',
-      title: 'Author',
-      fields: [
-        {
-          name: 'name',
-          title: 'Name',
-          type: 'string',
-        },
-        {
-          name: 'picture',
-          title: 'Picture',
-          type: 'image',
-        },
-      ],
-    },
-
-    {
-      name: 'post',
-      type: 'document',
-      title: 'Post',
+      title: 'Page',
       fields: [
         {
           name: 'title',
@@ -40,31 +25,45 @@ export default createSchema({
           type: 'string',
         },
         {
-          name: 'content',
-          title: 'Content',
+          name: 'isPublished',
+          title: 'IsPublished?',
+          type: 'boolean',
+        },
+        {
+          name: 'isAtFooter',
+          title: 'Is displayed at footer menu?',
+          type: 'boolean',
+        },
+        {
+          name: 'Price',
+          title: 'price',
+          type: 'number',
+        },
+        {
+          name: 'seoTitle',
+          title: 'SEO Title',
+          type: 'string',
+        },
+        {
+          name: 'seoDescription',
+          title: 'SEO Description',
+          type: 'string',
+        },
+        {
+          name: 'text',
+          title: 'Text',
           type: 'array',
           of: [{ type: 'block' }],
         },
         {
-          name: 'excerpt',
-          title: 'Excerpt',
-          type: 'string',
-        },
-        {
-          name: 'coverImage',
-          title: 'Cover Image',
+          name: 'image',
+          title: 'Svg image (square)',
           type: 'image',
         },
         {
           name: 'date',
           title: 'Date',
           type: 'datetime',
-        },
-        {
-          name: 'author',
-          title: 'Author',
-          type: 'reference',
-          to: [{ type: 'author' }],
         },
         {
           name: 'slug',
