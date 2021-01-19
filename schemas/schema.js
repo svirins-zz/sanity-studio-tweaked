@@ -1,9 +1,9 @@
-import schemaTypes from 'all:part:@sanity/base/schema-type'
+import schemaTypes from 'all:part:@sanity/base/schema-type';
 // First, we must import the schema creator
-import createSchema from 'part:@sanity/base/schema-creator'
+import createSchema from 'part:@sanity/base/schema-creator';
 
 // Then import schema types from any plugins that might expose them
-import siteSettings from './siteSettings'
+import siteSettings from './siteSettings';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -53,7 +53,27 @@ export default createSchema({
           name: 'text',
           title: 'Text',
           type: 'array',
-          of: [{ type: 'block' }],
+          of: [
+            { type: 'block' },
+            {
+              type: 'image',
+              fields: [
+                {
+                  type: 'text',
+                  name: 'alt',
+                  title: 'Alternative text',
+                  description: `Some of your visitors cannot see images, 
+                    be they blind, color-blind, low-sighted; 
+                    alternative text is of great help for those 
+                    people that can rely on it to have a good idea of 
+                    what\'s on your page.`,
+                  options: {
+                    isHighlighted: true,
+                  },
+                },
+              ],
+            },
+          ],
         },
         {
           name: 'image',
@@ -74,4 +94,4 @@ export default createSchema({
       ],
     },
   ]),
-})
+});
