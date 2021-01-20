@@ -1,3 +1,4 @@
+
 export default {
   title: 'Site Settings',
   name: 'siteSettings',
@@ -10,14 +11,16 @@ export default {
       validation: Rule => Rule.required()
     },
     {
-      title: 'Email',
+      title: 'Site Description',
       name: 'email',
       type: 'string'
     },
     {
-      title: 'Phone',
-      name: 'phone',
-      type: 'string'
+      title: 'Social Links',
+      name: 'socialLinks',
+      type: 'string',
+      type: 'array',
+      of: [{ type: 'social' }]
     }
   ]
 }

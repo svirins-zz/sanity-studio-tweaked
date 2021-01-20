@@ -2,8 +2,10 @@ import schemaTypes from 'all:part:@sanity/base/schema-type';
 // First, we must import the schema creator
 import createSchema from 'part:@sanity/base/schema-creator';
 
+import inlineImage from './inlineImage'
 // Then import schema types from any plugins that might expose them
 import siteSettings from './siteSettings';
+import social from './social'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -13,6 +15,8 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     /* Your types here! */
+    inlineImage,
+    social,
     siteSettings,
     {
       name: 'page',
@@ -35,8 +39,8 @@ export default createSchema({
           type: 'boolean',
         },
         {
-          name: 'Price',
-          title: 'price',
+          name: 'price',
+          title: 'Price',
           type: 'number',
         },
         {
@@ -55,24 +59,7 @@ export default createSchema({
           type: 'array',
           of: [
             { type: 'block' },
-            {
-              type: 'image',
-              fields: [
-                {
-                  type: 'text',
-                  name: 'alt',
-                  title: 'Alternative text',
-                  description: `Some of your visitors cannot see images, 
-                    be they blind, color-blind, low-sighted; 
-                    alternative text is of great help for those 
-                    people that can rely on it to have a good idea of 
-                    what\'s on your page.`,
-                  options: {
-                    isHighlighted: true,
-                  },
-                },
-              ],
-            },
+            { type: 'inlineImage' },
           ],
         },
         {
